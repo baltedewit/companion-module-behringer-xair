@@ -12,7 +12,7 @@ class ControllerInstance extends InstanceSkel<DeviceConfig> {
   public init() {
     this.status(this.STATUS_OK)
 
-    this.setActions(GetActionsList(this.state))
+    this.setActions(GetActionsList())
   }
 
   /**
@@ -26,7 +26,11 @@ class ControllerInstance extends InstanceSkel<DeviceConfig> {
    * Executes the provided action.
    */
   public action(action: CompanionActionEvent) {
-    HandleAction(this, action)
+    const command = HandleAction(this, action)
+
+    if (command) {
+      this.system.emit('osc_send', this.config.host, 10024, command.cmd, [command.arg])
+    }
   }
 
   /**

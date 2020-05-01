@@ -70,7 +70,8 @@ export function MuteStatePicker(): CompanionInputFieldDropdown {
     choices: [
       { id: '0', label: 'Mute' },
       { id: '1', label: 'Unmute' }
-    ]
+    ],
+    default: '0'
   }
 }
 
@@ -103,7 +104,8 @@ export function FaderLevelPresets(): CompanionInputFieldDropdown {
     type: 'dropdown',
     label: 'Fader Level',
     id: 'fad',
-    choices: faderLevels
+    choices: faderLevels,
+    default: '0.75'
   }
 }
 
@@ -117,7 +119,7 @@ export function LabelName(): CompanionInputFieldTextInput {
 }
 
 export function ColorPicker(): CompanionInputFieldDropdown {
-  const faderLevels = [
+  const colors = [
     { label: 'Off', id: '0' },
     { label: 'Red: ', id: '1' },
     { label: 'Green', id: '2' },
@@ -140,7 +142,8 @@ export function ColorPicker(): CompanionInputFieldDropdown {
     type: 'dropdown',
     label: 'Color',
     id: 'col',
-    choices: faderLevels
+    choices: colors,
+    default: '0'
   }
 }
 
@@ -158,6 +161,7 @@ export function TapeOperationPicker(): CompanionInputFieldDropdown {
     type: 'dropdown',
     label: 'Function',
     id: 'tFunc',
-    choices: tapeOperations
+    choices: tapeOperations,
+    default: '0'
   }
 }

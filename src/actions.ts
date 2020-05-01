@@ -134,18 +134,18 @@ export function HandleAction(instance: InstanceSkel<DeviceConfig>, action: Compa
       case 'mute':
         arg = {
           type: 'i',
-          value: parseInt(opt.mute)
+          value: parseInt(opt.mute as string)
         }
         if (opt.type == '/ch/') {
-          if (opt.num <= 9) {
-            nVal = ('0' + parseInt(opt.num)).substr(-2)
+          if ((opt.num as number) <= 9) {
+            nVal = ('0' + parseInt(opt.num as string)).substr(-2)
           }
-          if (opt.num >= 10) {
-            nVal = parseInt(opt.num)
+          if ((opt.num as number) >= 10) {
+            nVal = parseInt(opt.num as string)
           }
         }
         if (opt.type != '/ch/') {
-          nVal = parseInt(opt.num)
+          nVal = parseInt(opt.num as string)
         }
 
         cmd = opt.type + nVal + '/mix/on'
@@ -318,10 +318,13 @@ export function HandleAction(instance: InstanceSkel<DeviceConfig>, action: Compa
     }
 
     if (cmd !== undefined) {
-      instance.system.emit('osc_send', instance.config.host, 10024, cmd, [arg])
       instance.debug(cmd, arg)
+
+      return { cmd, arg }
     }
   } catch (e) {
     instance.debug('Action failed: ' + e)
   }
+
+  return
 }
